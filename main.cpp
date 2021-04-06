@@ -7,11 +7,11 @@ using namespace std;
 
 double hit_sphere(const point3& center, double radius, const ray& r){
   vec3 oc = r.origin() - center;
-  auto a = dot(r.direction(), r.direction());
-  auto b = 2.0 * dot(r.direction(), oc);
-  auto c = dot(oc, oc) - radius * radius;
-  auto discriminant = b * b - 4 * a * c;
-  if(discriminant >= 0)return (-b - sqrt(discriminant)) / (2.0 * a);
+  auto a = r.direction().length_squared();
+  auto half_b = dot(r.direction(), oc);
+  auto c = oc.length_squared() - radius * radius;
+  auto discriminant = half_b * half_b - a * c;
+  if(discriminant >= 0)return (-half_b - sqrt(discriminant)) / a;
   else return -1.0;
 }
 
