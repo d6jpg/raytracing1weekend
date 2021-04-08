@@ -14,7 +14,7 @@ public:
   void clear() {objects.clear();}
   void add(shared_ptr<hittable> object) {objects.push_back(object);}
 
-  virtual bool hist(const ray& r, double t_min, double t_max, hit_record& rec) const override;
+  virtual bool hit(const ray& r, double t_min, double t_max, hit_record& rec) const override;
 
 public:
   vector<shared_ptr<hittable>> objects;
