@@ -110,6 +110,11 @@ vec3 random_in_unit_sphere(){
     if(p.length_squared() >= 1)continue;
     return p;
   }
+
+}
+
+vec3 random_unit_vector(){
+  return unit_vector(random_in_unit_sphere());
 }
 
 #endif

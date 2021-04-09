@@ -15,6 +15,9 @@ void write_color(ostream &out, color pixel_color, int samples_per_pixel){
   r *= scale;
   g *= scale;
   b *= scale;
+  r = sqrt(r);
+  g = sqrt(g);
+  b = sqrt(b);
 
   /*
   out << static_cast<int>(255.999 * pixel_color.x()) << ' '
