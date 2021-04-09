@@ -1,9 +1,7 @@
 #include "camera.h"
 #include "rtweekend.h"
 #include "color.h"
-//#include "ray.h"
 #include "hittable_list.h"
-//#include "vec3.h"
 #include "sphere.h"
 #include "material.h"
 
@@ -14,9 +12,6 @@ color ray_color(const ray& r, const hittable& world, int depth){
   hit_record rec;
   if(depth <= 0)return color(0, 0, 0);
   if(world.hit(r, 0.001, infinity, rec)){
-    // point3 target = rec.p + random_in_hemisphere(rec.normal);
-    // return 0.5 * (rec.normal + color(1, 1, 1));
-    // return 0.5 * ray_color(ray(rec.p, target - rec.p), world, depth - 1);
     ray scattered;
     color attenuation;
     if(rec.mat_ptr->scatter(r, rec, attenuation, scattered)){
@@ -40,8 +35,8 @@ int main(){
   // World
   hittable_list world;
   auto material_ground = make_shared<lambertian>(color(0.8, 0.8, 0.0));
-  auto material_center = make_shared<lambertian>(color(0.7, 0.3, 0.3));
-  auto left = make_shared<metal>(color(0.8, 0.8, 0.8), 0.3);
+  auto material_center = make_shared<dielectric>(1.5);
+  auto left = make_shared<dielectric>(1.5);
   auto right = make_shared<metal>(color(0.8, 0.6, 0.2), 1.0);
 
   world.add(make_shared<sphere>(point3(0.0, -100.5, -1.0), 100.0, material_ground));
